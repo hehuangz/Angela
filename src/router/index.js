@@ -16,6 +16,11 @@ const routes = [
         component: resolve => require(['@/views/login/index.vue'], resolve)
     },
     {
+        path: '/build',
+        name: 'build',
+        component: resolve => require(['@/views/build/index.vue'], resolve)
+    },
+    {
         path: '/layout',
         name: 'layout',
         component: resolve => require(['@/views/layout/index.vue'], resolve),
