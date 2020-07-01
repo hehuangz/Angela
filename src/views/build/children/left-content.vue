@@ -1,10 +1,20 @@
 <template>
     <div class="left-content g-bg-white g-vh g-fs-0 g-border-r-e5e5e5">
         <p class="g-tc g-fs-20 g-lh-50 g-border-b-e5e5e5">ANGELA页面搭建系统</p>
-        <el-scrollbar class="scrollbar-content">
+        <el-scrollbar class="scrollbar-content g-tl">
             <div class="g-pd-15">
                 <div v-for="(item, index) in leftComponets" :key="index">
-                   <p class="g-fs-18">{{item.title}}</p>
+                    <p class="g-fs-18">{{item.title}}</p>
+                    <div
+                        v-for="(element, index) in item.list"
+                        :key="index"
+                        class="components-item"
+                    >
+                        <div class="components-body">
+                            <svg-icon :iconName="element.__config__.tagIcon" />
+                            {{element.__config__.label}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </el-scrollbar>

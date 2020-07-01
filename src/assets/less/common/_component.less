@@ -60,3 +60,34 @@
     height: calc(100vh - 51px);
     overflow: hidden;
 }
+
+// 左侧组件的样式
+.components-item {
+    display: inline-block;
+    width: 48%;
+    margin: 1%;
+    transition: transform 0ms!important;
+}
+
+.components-body {
+    padding: 8px 10px;
+    background: @selectedColor;
+    font-size: 12px;
+    cursor: move;
+    border: 1px dashed @selectedColor;
+    border-radius: 3px;
+
+    .svg-icon {
+        color: #777;
+        font-size: 15px;
+    }
+
+    &:hover {
+        border: 1px dashed #787be8;
+        color: #787be8;
+
+        .svg-icon {
+            color: #787be8;
+        }
+    }
+}
