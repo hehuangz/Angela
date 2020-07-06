@@ -1,5 +1,5 @@
 <template>
-    <div class="conter-content g-bg-white g-vh">
+    <div class="center-content g-bg-white g-vh">
         <!-- 顶部按钮区 -->
         <div class="g-tr g-lh-50 g-border-b-e5e5e5 g-pd-r-15">
             <el-button icon="el-icon-video-play" type="text" @click="run">运行</el-button>
@@ -9,26 +9,28 @@
             <el-button class="g-c-danger" icon="el-icon-delete" type="text" @click="empty">清空</el-button>
         </div>
         <!-- 拖拽展示区 -->
-        <el-scrollbar class="scrollbar-content">
-            <el-form
-                :size="formConf.size"
-                :label-position="formConf.labelPosition"
-                :disabled="formConf.disabled"
-                :label-width="formConf.labelWidth + 'px'">
-                <draggable class="drawing-board" :list="drawingList" :animation="340" group="componentsGroup">
-                    <draggable-item
-                        v-for="(element, index) in drawingList"
-                        :key="element.renderKey"
-                        :drawing-list="drawingList"
-                        :element="element"
-                        :index="index"
-                        :form-conf="formConf"
-                    />
-                </draggable>
-                <div v-show="!drawingList.length" class="empty-info">
-                    从左侧拖入或点选组件进行表单设计
-                </div>
-            </el-form>
+        <el-scrollbar class="scrollbar-content g-pd-15">
+            <div class="center-board-row">
+                <el-form
+                    :size="formConf.size"
+                    :label-position="formConf.labelPosition"
+                    :disabled="formConf.disabled"
+                    :label-width="formConf.labelWidth + 'px'">
+                    <draggable class="drawing-board" :list="drawingList" :animation="340" group="componentsGroup">
+                        <draggable-item
+                            v-for="(element, index) in drawingList"
+                            :key="element.renderKey"
+                            :drawing-list="drawingList"
+                            :element="element"
+                            :index="index"
+                            :form-conf="formConf"
+                        />
+                    </draggable>
+                    <div v-show="!drawingList.length" class="empty-info">
+                        从左侧拖入或点选组件进行表单设计
+                    </div>
+                </el-form>
+            </div>
         </el-scrollbar>
     </div>
 </template>
@@ -41,7 +43,7 @@ import draggableItem from './draggable-item'
 import { saveDrawingList } from '@/utils/db'
 import { debounce } from 'throttle-debounce' // 加入防抖，提升缓存表单的性能
 export default {
-    name: 'conter-content',
+    name: 'center-content',
     components: {
         draggable,
         draggableItem
@@ -72,7 +74,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.conter-content {
+.center-content {
     width: 100%;
+}
+
+.drawing-board {
+    height: 100%;
+    position: relative;
 }
 </style>

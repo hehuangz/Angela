@@ -5,16 +5,24 @@
             <div class="g-pd-15">
                 <div v-for="(item, index) in leftComponets" :key="index">
                     <p class="g-fs-18">{{item.title}}</p>
-                    <div
-                        v-for="(element, index) in item.list"
-                        :key="index"
-                        class="components-item"
-                    >
-                        <div class="components-body">
-                            <svg-icon :iconName="element.__config__.tagIcon" />
-                            {{element.__config__.label}}
+                    <draggable
+                        class="Tag-leftComponent g-pd-b-20"
+                        :list="item.list"
+                        :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
+                        :clone="cloneComponent"
+                        draggable=".components-item"
+                        :sort="false"
+                        @end="onEnd">
+                        <div
+                            v-for="(element, index) in item.list"
+                            :key="index"
+                            class="components-item">
+                            <div class="components-body">
+                                <svg-icon :iconName="element.__config__.tagIcon" />
+                                {{element.__config__.label}}
+                            </div>
                         </div>
-                    </div>
+                    </draggable>
                 </div>
             </div>
         </el-scrollbar>
@@ -22,11 +30,15 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 import {
     searchComponents, tableComponents, formComponents, actionComponents
 } from '@/components/generator/config'
 export default {
     name: 'left-content',
+    components: {
+        draggable
+    },
     data () {
         return {
             leftComponets: [
@@ -47,6 +59,15 @@ export default {
                     list: actionComponents
                 }
             ]
+        }
+    },
+    methods: {
+        cloneComponent (origin) {
+            const clone = JSON.parse(JSON.stringify(origin))
+            return clone
+        },
+        onEnd (obj) {
+            console.log(obj, 11)
         }
     }
 }
