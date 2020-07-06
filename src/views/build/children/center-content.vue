@@ -14,8 +14,7 @@
                 :size="formConf.size"
                 :label-position="formConf.labelPosition"
                 :disabled="formConf.disabled"
-                :label-width="formConf.labelWidth + 'px'"
-            >
+                :label-width="formConf.labelWidth + 'px'">
                 <draggable class="drawing-board" :list="drawingList" :animation="340" group="componentsGroup">
                     <draggable-item
                         v-for="(element, index) in drawingList"
@@ -40,14 +39,26 @@
 
 <script>
 import { formConf } from '@/components/generator/config'
+import drawingDefault from '@/components/generator/default/drawingDefault'
 // import draggable from 'vuedraggable'
 // import draggableItem from './draggable-item'
+import { saveDrawingList } from '@/utils/db'
+import { debounce } from 'throttle-debounce' // 加入防抖，提升缓存表单的性能
 export default {
     name: 'conter-content',
     data () {
         return {
-            drawingList: [],
-            formConf: formConf
+            drawingList: drawingDefault,
+            formConf: formConf,
+            saveDrawingListDebounce: debounce(340, saveDrawingList(this.drawingList))
+        }
+    },
+    watch: {
+        drawingList: {
+            handler (val) {
+                this.saveDrawingListDebounce(val)
+            },
+            deep: true
         }
     },
     methods: {
