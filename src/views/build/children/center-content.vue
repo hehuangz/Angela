@@ -22,11 +22,7 @@
                         :drawing-list="drawingList"
                         :element="element"
                         :index="index"
-                        :active-id="activeId"
                         :form-conf="formConf"
-                        @activeItem="activeFormItem"
-                        @copyItem="drawingItemCopy"
-                        @deleteItem="drawingItemDelete"
                     />
                 </draggable>
                 <div v-show="!drawingList.length" class="empty-info">
@@ -40,12 +36,16 @@
 <script>
 import { formConf } from '@/components/generator/config'
 import drawingDefault from '@/components/generator/default/drawingDefault'
-// import draggable from 'vuedraggable'
-// import draggableItem from './draggable-item'
+import draggable from 'vuedraggable'
+import draggableItem from './draggable-item'
 import { saveDrawingList } from '@/utils/db'
 import { debounce } from 'throttle-debounce' // 加入防抖，提升缓存表单的性能
 export default {
     name: 'conter-content',
+    components: {
+        draggable,
+        draggableItem
+    },
     data () {
         return {
             drawingList: drawingDefault,
