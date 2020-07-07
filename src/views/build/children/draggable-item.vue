@@ -8,6 +8,7 @@ const layouts = {
         return (
             <el-col
                 span={config.span}
+                class="drawing-item"
                 nativeOnClick={event => { activeItem(element); event.stopPropagation() }}>
                 <el-form-item
                     label={config.showLabel ? config.label : ''}

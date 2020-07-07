@@ -13,7 +13,6 @@
             <div class="center-board-row">
                 <el-form
                     :size="formConf.size"
-                    :label-position="formConf.labelPosition"
                     :disabled="formConf.disabled"
                     :label-width="formConf.labelWidth + 'px'">
                     <draggable class="drawing-board" :list="drawingList" :animation="340" group="componentsGroup">
@@ -53,7 +52,6 @@ export default {
     data () {
         return {
             drawingList: drawingDefault,
-            activeData: drawingDefault[0],
             formConf: formConf,
             saveDrawingListDebounce: debounce(340, saveDrawingList(this.drawingList))
         }
