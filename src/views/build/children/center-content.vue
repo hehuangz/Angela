@@ -32,6 +32,13 @@
                 </el-form>
             </div>
         </el-scrollbar>
+
+        <!-- 运行区，抽屉的方式 -->
+        <form-drawer
+            :visible.sync="drawerVisible"
+            :form-data="formData"
+            size="100%"
+        />
     </div>
 </template>
 
@@ -43,17 +50,21 @@ import draggableItem from './draggable-item'
 import { saveDrawingList } from '@/utils/db'
 import { debounce } from 'throttle-debounce' // 加入防抖，提升缓存表单的性能
 import { buildModule, BUILD_ACTIVEDATA } from '@/store/modules/build'
+import formDrawer from './form-drawer'
 export default {
     name: 'center-content',
     components: {
         draggable,
-        draggableItem
+        draggableItem,
+        formDrawer
     },
     data () {
         return {
             drawingList: drawingDefault,
             formConf: formConf,
-            saveDrawingListDebounce: debounce(340, saveDrawingList(this.drawingList))
+            saveDrawingListDebounce: debounce(340, saveDrawingList(this.drawingList)),
+            drawerVisible: false,
+            formData: {}
         }
     },
     watch: {
@@ -68,7 +79,13 @@ export default {
         activeItem (element) {
             this.$store.dispatch(`${buildModule.name}/${BUILD_ACTIVEDATA}`, element)
         },
-        run () {},
+        run () {
+            this.formData = {
+                fields: JSON.parse(JSON.stringify(this.drawingList)),
+                ...this.formConf
+            }
+            this.drawerVisible = true
+        },
         preview () {},
         download () {},
         save () {},
