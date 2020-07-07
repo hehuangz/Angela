@@ -24,6 +24,7 @@
                             :element="element"
                             :index="index"
                             :form-conf="formConf"
+                            @activeItem="activeItem"
                         />
                     </draggable>
                     <div v-show="!drawingList.length" class="empty-info">
@@ -42,6 +43,7 @@ import draggable from 'vuedraggable'
 import draggableItem from './draggable-item'
 import { saveDrawingList } from '@/utils/db'
 import { debounce } from 'throttle-debounce' // 加入防抖，提升缓存表单的性能
+import { buildModule, BUILD_ACTIVEDATA } from '@/store/modules/build'
 export default {
     name: 'center-content',
     components: {
@@ -51,6 +53,7 @@ export default {
     data () {
         return {
             drawingList: drawingDefault,
+            activeData: drawingDefault[0],
             formConf: formConf,
             saveDrawingListDebounce: debounce(340, saveDrawingList(this.drawingList))
         }
@@ -64,6 +67,9 @@ export default {
         }
     },
     methods: {
+        activeItem (element) {
+            this.$store.dispatch(`${buildModule.name}/${BUILD_ACTIVEDATA}`, element)
+        },
         run () {},
         preview () {},
         download () {},

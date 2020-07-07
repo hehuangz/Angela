@@ -4,17 +4,22 @@ import render from '@/components/render/render'
 const layouts = {
     colFormItem (h, element, index, parent) {
         const config = element.__config__
+        const { activeItem } = this.$listeners
         return (
-            <el-form-item
-                label={config.showLabel ? config.label : ''}
-                label-width={`${config.labelWidth}px`}
-                required={config.required}>
-                <render
-                    key={config.renderKey}
-                    conf={element}
-                    onInput={ event => { this.$set(config, 'defaultValue', event) }}
-                />
-            </el-form-item>
+            <el-col
+                span={config.span}
+                nativeOnClick={event => { activeItem(element); event.stopPropagation() }}>
+                <el-form-item
+                    label={config.showLabel ? config.label : ''}
+                    label-width={`${config.labelWidth}px`}
+                    required={config.required}>
+                    <render
+                        key={config.renderKey}
+                        conf={element}
+                        onInput={ event => { this.$set(config, 'defaultValue', event) }}
+                    />
+                </el-form-item>
+            </el-col>
         )
     }
 }
