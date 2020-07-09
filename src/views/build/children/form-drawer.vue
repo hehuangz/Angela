@@ -6,10 +6,36 @@
         @opened="onOpen"
         @close="onClose">
         <div class="g-h">
-            <el-row class="g-h">
+            <el-row class="g-h" style="height: 100%;">
                 <el-col :md="24" :lg="12" class="left-editor">
-
+                    <el-tabs v-model="activeTab" type="card" class="editor-tabs">
+                        <el-tab-pane name="html">
+                            <span slot="label">
+                                <i v-if="activeTab==='html'" class="el-icon-edit" />
+                                <i v-else class="el-icon-document" />
+                                template
+                            </span>
+                        </el-tab-pane>
+                        <el-tab-pane name="js">
+                            <span slot="label">
+                                <i v-if="activeTab==='js'" class="el-icon-edit" />
+                                <i v-else class="el-icon-document" />
+                                script
+                            </span>
+                        </el-tab-pane>
+                        <el-tab-pane name="css">
+                            <span slot="label">
+                                <i v-if="activeTab==='css'" class="el-icon-edit" />
+                                <i v-else class="el-icon-document" />
+                                css
+                            </span>
+                        </el-tab-pane>
+                    </el-tabs>
+                    <div v-show="activeTab==='html'" id="editorHtml" class="tab-editor" />
+                    <div v-show="activeTab==='js'" id="editorJs" class="tab-editor" />
+                    <div v-show="activeTab==='css'" id="editorCss" class="tab-editor" />
                 </el-col>
+
                 <el-col :md="24" :lg="12" class="right-preview">
                 </el-col>
             </el-row>
@@ -18,13 +44,21 @@
 </template>
 
 <script>
+import { makeUpHtml } from '@/components/generator/html'
+// import { makeUpJs } from '@/components/generator/js'
+// import { makeUpCss } from '@/components/generator/css'
 export default {
     props: {
-
+        formData: {
+            type: Object,
+            default () {
+                return {}
+            }
+        }
     },
     data () {
         return {
-
+            activeTab: 'html'
         }
     },
     mounted () {
@@ -32,7 +66,9 @@ export default {
     },
     methods: {
         onOpen () {
-
+            this.htmlCode = makeUpHtml(this.formData)
+            // this.jsCode = makeUpJs(this.formData)
+            // this.cssCode = makeUpCss(this.formData)
         },
         onClose () {
 
@@ -51,5 +87,14 @@ export default {
 
 .right-preview {
     height: 100%;
+}
+
+.tab-editor {
+    position: absolute;
+    top: 33px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 14px;
 }
 </style>
