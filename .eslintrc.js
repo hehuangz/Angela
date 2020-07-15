@@ -26,7 +26,8 @@ module.exports = {
         'new-cap': 'off', // 不要求构造函数首字母大写
         eqeqeq: 'error', // 使用全等
         quotes: [1, 'single'], // 引号类型，使用单引号
-        camelcase: 'off'
+        camelcase: 'off',
+        'no-eval': 0
     },
     overrides: [
         {
