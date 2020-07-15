@@ -35,7 +35,6 @@
                     <div v-show="activeTab==='js'" id="editorJs" class="tab-editor" />
                     <div v-show="activeTab==='css'" id="editorCss" class="tab-editor" />
                 </el-col>
-
                 <el-col :md="24" :lg="12" class="right-preview">
                 </el-col>
             </el-row>
@@ -47,6 +46,22 @@
 import { makeUpHtml } from '@/components/generator/html'
 // import { makeUpJs } from '@/components/generator/js'
 // import { makeUpCss } from '@/components/generator/css'
+import loadMonaco from '@/utils/loadMonaco'
+import loadBeautifier from '@/utils/loadBeautifier'
+import { beautifierConf } from '@/utils/loadConf'
+const editorObj = {
+    html: null,
+    js: null,
+    css: null
+}
+const mode = {
+    html: 'html',
+    js: 'javascript',
+    css: 'css'
+}
+let beautifier
+let monaco
+
 export default {
     props: {
         formData: {
@@ -67,8 +82,43 @@ export default {
     methods: {
         onOpen () {
             this.htmlCode = makeUpHtml(this.formData)
-            // this.jsCode = makeUpJs(this.formData)
-            // this.cssCode = makeUpCss(this.formData)
+            this.jsCode = 'makeUpJs(this.formData)'
+            this.cssCode = 'makeUpCss(this.formData)'
+            loadBeautifier(btf => {
+                beautifier = btf
+                this.htmlCode = beautifier.html(this.htmlCode, beautifierConf.html)
+                // this.jsCode = beautifier.js(this.jsCode, beautifierConf.js)
+                // this.cssCode = beautifier.css(this.cssCode, beautifierConf.html)
+
+                loadMonaco(val => {
+                    monaco = val
+                    this.setEditorValue('editorHtml', 'html', this.htmlCode)
+                    this.setEditorValue('editorJs', 'js', this.jsCode)
+                    this.setEditorValue('editorCss', 'css', this.cssCode)
+                    if (!this.isInitcode) {
+                        this.isRefreshCode = true
+                        this.isIframeLoaded && (this.isInitcode = true) && this.runCode()
+                    }
+                })
+            })
+        },
+        setEditorValue (id, type, codeStr) {
+            if (editorObj[type]) {
+                editorObj[type].setValue(codeStr)
+            } else {
+                editorObj[type] = monaco.editor.create(document.getElementById(id), {
+                    value: codeStr,
+                    theme: 'vs-dark',
+                    language: mode[type],
+                    automaticLayout: true
+                })
+            }
+            // ctrl + s 刷新
+            editorObj[type].onKeyDown(e => {
+                if (e.keyCode === 49 && (e.metaKey || e.ctrlKey)) {
+                    this.runCode()
+                }
+            })
         },
         onClose () {
 
