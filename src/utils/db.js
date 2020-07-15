@@ -1,3 +1,7 @@
+/**
+ * 操作数据的方法
+ */
+
 const DRAWING_ITEMS = 'drawingItems'
 const DRAWING_ITEMS_VERSION = '1.1'
 const DRAWING_ITEMS_VERSION_KEY = 'DRAWING_ITEMS_VERSION'

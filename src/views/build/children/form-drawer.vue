@@ -44,8 +44,8 @@
 
 <script>
 import { makeUpHtml } from '@/components/generator/html'
-// import { makeUpJs } from '@/components/generator/js'
-// import { makeUpCss } from '@/components/generator/css'
+import { makeUpJs } from '@/components/generator/js'
+import { makeUpCss } from '@/components/generator/css'
 import loadMonaco from '@/utils/loadMonaco'
 import loadBeautifier from '@/utils/loadBeautifier'
 import { beautifierConf } from '@/utils/loadConf'
@@ -82,13 +82,13 @@ export default {
     methods: {
         onOpen () {
             this.htmlCode = makeUpHtml(this.formData)
-            this.jsCode = 'makeUpJs(this.formData)'
-            this.cssCode = 'makeUpCss(this.formData)'
+            this.jsCode = makeUpJs(this.formData)
+            this.cssCode = makeUpCss(this.formData)
             loadBeautifier(btf => {
                 beautifier = btf
                 this.htmlCode = beautifier.html(this.htmlCode, beautifierConf.html)
-                // this.jsCode = beautifier.js(this.jsCode, beautifierConf.js)
-                // this.cssCode = beautifier.css(this.cssCode, beautifierConf.html)
+                this.jsCode = beautifier.js(this.jsCode, beautifierConf.js)
+                this.cssCode = beautifier.css(this.cssCode, beautifierConf.html)
 
                 loadMonaco(val => {
                     monaco = val
@@ -140,6 +140,7 @@ export default {
 }
 
 .tab-editor {
+    background: @editorTabsborderColor;
     position: absolute;
     top: 33px;
     bottom: 0;

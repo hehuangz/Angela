@@ -12,6 +12,42 @@
     }
 }
 
+// 运行后的编辑器页面
+.editor-tabs {
+    .el-tabs__header {
+        margin: 0;
+        border-bottom-color: @editorTabsborderColor;
+
+        .el-tabs__nav {
+            border-color: @editorTabsborderColor;
+        }
+    }
+
+    .el-tabs__item {
+        height: 32px;
+        line-height: 32px;
+        color: #888a8e;
+        border-left: 1px solid @editorTabsborderColor!important;
+        background: #363636;
+        margin-right: 5px;
+        user-select: none;
+    }
+
+    .el-tabs__item.is-active {
+        background: #1e1e1e;
+        border-bottom-color: #1e1e1e!important;
+        color: #fff;
+    }
+
+    .el-icon-edit {
+        color: #f1fa8c;
+    }
+
+    .el-icon-document {
+        color: #a95812;
+    }
+}
+
 // 搭建中心右侧面板
 .right-content {
     .center-tabs {

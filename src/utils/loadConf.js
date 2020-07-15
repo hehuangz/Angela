@@ -38,3 +38,9 @@ export const beautifierConf = {
         indent_empty_lines: true
     }
 }
+
+export const exportDefault = 'export default '
+
+export function titleCase (str) {
+    return str.replace(/( |^)[a-z]/g, L => L.toUpperCase())
+}
