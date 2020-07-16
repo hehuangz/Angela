@@ -1,5 +1,5 @@
 <template>
-    <div class="center-content g-bg-white g-vh">
+    <div class="build-center-content g-bg-white g-vh g-w">
         <!-- 顶部按钮区 -->
         <div class="g-tr g-lh-50 g-border-b-e5e5e5 g-pd-r-15">
             <el-button icon="el-icon-video-play" type="text" @click="run">运行</el-button>
@@ -95,10 +95,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.center-content {
-    width: 100%;
-}
-
 .drawing-board {
     height: 100%;
     position: relative;
