@@ -8,7 +8,7 @@
         <div class="g-h">
             <el-row class="g-h" style="height: 100%;">
                 <el-col :md="24" :lg="12" class="left-editor">
-                    <el-tabs v-model="activeTab" type="card" class="editor-tabs">
+                    <el-tabs v-model="activeTab" type="card" class="build-editor-tabs">
                         <el-tab-pane name="html">
                             <span slot="label">
                                 <i v-if="activeTab==='html'" class="el-icon-edit" />
