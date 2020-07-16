@@ -223,7 +223,6 @@ function buildOptionMethod (methodName, model, methodList) {
 
 // js整体拼接
 function buildExport (conf, type = 'file', data, rules, selectOptions, uploadVar, props, methods) {
-    console.log(exportDefault, 44)
     const str = `${exportDefault}{
   ${inheritAttrs[type]}
   components: {},
