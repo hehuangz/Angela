@@ -52,7 +52,7 @@ import { debounce } from 'throttle-debounce' // 加入防抖，提升缓存表�
 import { buildModule, BUILD_ACTIVEDATA } from '@/store/modules/build'
 import formDrawer from './form-drawer'
 export default {
-    name: 'center-content',
+    name: 'build-center-content',
     components: {
         draggable,
         draggableItem,

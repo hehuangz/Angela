@@ -1,5 +1,5 @@
 <template>
-    <div class="right-content g-bg-white g-vh g-fs-0 g-border-l-e5e5e5">
+    <div class="build-right-content g-bg-white g-vh g-fs-0 g-border-l-e5e5e5">
         <el-tabs v-model="currentTab" class="center-tabs">
             <el-tab-pane label="属性" name="attr" />
             <el-tab-pane label="数据" name="data" />
@@ -53,7 +53,7 @@ import { mapState } from 'vuex'
 import drawingDefault from '@/components/generator/default/drawingDefault'
 import { formConf } from '@/components/generator/config'
 export default {
-    name: 'right-content',
+    name: 'build-right-content',
     data () {
         return {
             currentTab: 'attr',
@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.right-content {
+.build-build-right-content {
     width: 20%;
     min-width: 300px;
 }

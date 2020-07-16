@@ -1,5 +1,5 @@
 <template>
-    <div class="left-content g-bg-white g-vh g-fs-0 g-border-r-e5e5e5">
+    <div class="build-left-content g-bg-white g-vh g-fs-0 g-border-r-e5e5e5">
         <p class="g-tc g-fs-20 g-lh-50 g-border-b-e5e5e5">ANGELA页面搭建系统</p>
         <el-scrollbar class="scrollbar-content g-tl">
             <div class="g-pd-15">
@@ -35,7 +35,7 @@ import {
     searchComponents, tableComponents, formComponents, actionComponents
 } from '@/components/generator/config'
 export default {
-    name: 'left-content',
+    name: 'build-left-content',
     components: {
         draggable
     },
@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.left-content {
+.build-left-content {
     width: 15%;
     min-width: 240px;
 }
