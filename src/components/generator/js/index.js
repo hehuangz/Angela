@@ -1,4 +1,4 @@
-import { exportDefault, titleCase } from '@/utils/index'
+import { exportDefault, titleCase } from '@/utils/loadConf'
 import ruleTrigger from '../html/ruleTrigger'
 
 const units = {
@@ -30,7 +30,7 @@ export function makeUpJs (formConfig, type) {
         buildAttributes(el, dataList, ruleList, optionsList, methodList, propsList, uploadVarList)
     })
 
-    const script = buildexport(
+    const script = buildExport(
         formConfig,
         type,
         dataList.join('\n'),
@@ -222,7 +222,8 @@ function buildOptionMethod (methodName, model, methodList) {
 }
 
 // js整体拼接
-function buildexport (conf, type, data, rules, selectOptions, uploadVar, props, methods) {
+function buildExport (conf, type = 'file', data, rules, selectOptions, uploadVar, props, methods) {
+    console.log(exportDefault, 44)
     const str = `${exportDefault}{
   ${inheritAttrs[type]}
   components: {},
