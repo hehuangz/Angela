@@ -15,6 +15,7 @@
     "@babel/parser": "^7.10.5",
     "core-js": "^3.6.4",
     "element-ui": "^2.13.0",
+    "file-saver": "^2.0.2",
     "throttle-debounce": "^2.2.1",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",

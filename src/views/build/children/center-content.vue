@@ -51,6 +51,14 @@ import { saveDrawingList } from '@/utils/db'
 import { debounce } from 'throttle-debounce' // 加入防抖，提升缓存表单的性能
 import { buildModule, BUILD_ACTIVEDATA } from '@/store/modules/build'
 import formDrawer from './form-drawer'
+import { makeUpHtml, vueTemplate, vueScript, cssStyle } from '@/components/generator/html'
+import { makeUpJs } from '@/components/generator/js'
+import { makeUpCss } from '@/components/generator/css'
+import loadBeautifier from '@/utils/loadBeautifier'
+import { beautifierConf } from '@/utils/loadConf'
+import { saveAs } from 'file-saver'
+let beautifier
+
 export default {
     name: 'build-center-content',
     components: {
@@ -75,21 +83,40 @@ export default {
             deep: true
         }
     },
+    mounted () {
+        loadBeautifier(btf => {
+            beautifier = btf
+        })
+    },
     methods: {
         activeItem (element) {
             this.$store.dispatch(`${buildModule.name}/${BUILD_ACTIVEDATA}`, element)
         },
         run () {
+            this.assembleFormData()
+            this.drawerVisible = true
+        },
+        preview () {},
+        download () {
+            const codeStr = this.generateCode()
+            const blob = new Blob([codeStr], { type: 'text/plain;charset=utf-8' })
+            saveAs(blob, 'download.vue')
+        },
+        save () {},
+        empty () {},
+        assembleFormData () {
             this.formData = {
                 fields: JSON.parse(JSON.stringify(this.drawingList)),
                 ...this.formConf
             }
-            this.drawerVisible = true
         },
-        preview () {},
-        download () {},
-        save () {},
-        empty () {}
+        generateCode () {
+            this.assembleFormData()
+            const script = vueScript(makeUpJs(this.formData))
+            const html = vueTemplate(makeUpHtml(this.formData))
+            const css = cssStyle(makeUpCss(this.formData))
+            return beautifier.html(html + script + css, beautifierConf.html)
+        }
     }
 }
 </script>
