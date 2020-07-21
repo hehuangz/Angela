@@ -169,7 +169,6 @@ export default {
                             links: this.links
                         }
                     }
-
                     this.$refs.previewPage.contentWindow.postMessage(
                         postData,
                         location.origin

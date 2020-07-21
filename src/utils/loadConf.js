@@ -12,7 +12,7 @@ export const beautifierConf = {
         unescape_strings: false,
         jslint_happy: false,
         end_with_newline: true,
-        wrap_line_length: '110',
+        wrap_line_length: '120',
         indent_inner_html: true,
         comma_first: false,
         e4x: true,
