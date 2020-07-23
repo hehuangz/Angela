@@ -38,6 +38,7 @@
             :visible.sync="drawerVisible"
             :form-data="formData"
             size="100%"
+            :generateConf="{type: 'file'}"
         />
     </div>
 </template>

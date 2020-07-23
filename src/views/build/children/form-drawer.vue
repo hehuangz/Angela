@@ -92,13 +92,21 @@ export default {
             default () {
                 return {}
             }
+        },
+        generateConf: {
+            type: Object,
+            default () {
+                return {}
+            }
         }
     },
     data () {
         return {
             activeTab: 'html',
             isIframeLoaded: false,
-            isInitcode: false // 保证open后两个异步只执行一次runcode
+            isInitcode: false, // 保证open后两个异步只执行一次runcode
+            scripts: [],
+            links: []
         }
     },
     methods: {
@@ -147,6 +155,7 @@ export default {
             try {
                 const ast = parse(jsCodeStr, { sourceType: 'module' })
                 const astBody = ast.program.body
+                console.log(astBody, 22)
                 if (astBody.length > 1) {
                     this.$confirm(
                         'js格式不能识别，仅支持修改export default的对象内容',
