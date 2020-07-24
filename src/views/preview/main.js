@@ -1,5 +1,8 @@
-import Vue from 'vue/dist/vue.esm.js'
+import Vue from 'vue/dist/vue.js'
 import { loadScriptQueue } from '@/utils/loadScript'
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(Element)
 
 const $previewApp = document.getElementById('previewApp')
 const childAttrs = {
@@ -21,6 +24,7 @@ function init (event) {
     console.log(event, 22)
     if (event.data && event.data.type && (event.data.type === 'refreshFrame')) {
         const code = event.data.data
+        console.log(code.js, 44)
         const attrs = childAttrs[code.generateConf.type || 'file']
         let links = ''
 
@@ -44,6 +48,7 @@ function newVue (attrs, main, html) {
     main = eval(`(${main})`)
     main.template = `<div>${html}</div>`
     console.log(main, 33)
+    const res = Vue.compile(`<div><h1>hjgas</h1><child ${attrs}/></div>`)
     new Vue({
         components: {
             child: main
@@ -53,6 +58,6 @@ function newVue (attrs, main, html) {
                 visible: true
             }
         },
-        template: `<div><h1>hjgas</h1><child ${attrs}/></div>`
+        render: res.render
     }).$mount('#app')
 }
