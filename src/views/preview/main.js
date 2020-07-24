@@ -21,10 +21,8 @@ function buildLinks (links) {
 }
 
 function init (event) {
-    console.log(event, 22)
     if (event.data && event.data.type && (event.data.type === 'refreshFrame')) {
         const code = event.data.data
-        console.log(code.js, 44)
         const attrs = childAttrs[code.generateConf.type || 'file']
         let links = ''
 
@@ -47,8 +45,7 @@ function init (event) {
 function newVue (attrs, main, html) {
     main = eval(`(${main})`)
     main.template = `<div>${html}</div>`
-    console.log(main, 33)
-    const res = Vue.compile(`<div><h1>hjgas</h1><child ${attrs}/></div>`)
+    const res = Vue.compile(`<div><child ${attrs}/></div>`)
     new Vue({
         components: {
             child: main
