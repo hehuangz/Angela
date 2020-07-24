@@ -230,7 +230,7 @@ function buildExport (conf, type = 'file', data, rules, selectOptions, uploadVar
   data () {
     return {
       ${conf.formModel}: {
-        ${data}
+        ${data} || ''
       },
       ${conf.formRules}: {
         ${rules}
