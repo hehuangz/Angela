@@ -2,6 +2,16 @@ const path = require('path')
 const subdirectoryPath = require('./config/subdirectory-path')
 const publicpath = require('./config/public-path')
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
+const minify = process.env.NODE_ENV === 'development' ? false : {
+    collapseWhitespace: true,
+    removeComments: true,
+    removeRedundantAttributes: true,
+    removeScriptTypeAttributes: true,
+    removeStyleLinkTypeAttributes: true,
+    useShortDoctype: true,
+    minifyCSS: true,
+    minifyJS: true
+}
 
 module.exports = {
     publicPath: publicpath,
@@ -9,6 +19,22 @@ module.exports = {
     // eslint-loader 是否在保存的时候检查
     lintOnSave: true,
     productionSourceMap: !IS_PROD,
+    pages: {
+        index: {
+            entry: 'src/main.js',
+            template: 'public/index.html',
+            filename: 'index.html',
+            chunks: ['chunk-vendors', 'chunk-common', 'index'],
+            minify
+        },
+        preview: {
+            entry: 'src/views/preview/main.js',
+            template: 'public/preview.html',
+            filename: 'preview.html',
+            chunks: ['chunk-vendors', 'chunk-common', 'preview'],
+            minify
+        }
+    },
     // webpack-dev-server 相关配置
     devServer: {
         open: true,

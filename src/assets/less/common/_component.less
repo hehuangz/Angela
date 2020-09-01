@@ -1,7 +1,6 @@
 /**
  * 小部件样式
  */
-
 // 父容器设置g-relative，可实现上下左右居中布局
 .g-absolute-center {
     position: absolute;
@@ -53,4 +52,65 @@
 // 鼠标变小手
 .g-pointer {
     cursor: pointer;
+}
+
+// 去掉 50px 顶部栏和 1px 顶部边框的高度
+.scrollbar-content {
+    height: calc(100vh - 51px);
+    overflow: hidden;
+}
+
+// 左侧组件的样式
+.components-item {
+    display: inline-block;
+    width: 48%;
+    margin: 1%;
+    transition: transform 0ms!important;
+}
+
+.components-body {
+    padding: 8px 10px;
+    background: @selectedColor;
+    font-size: 12px;
+    cursor: move;
+    border: 1px dashed @selectedColor;
+    border-radius: 3px;
+
+    .svg-icon {
+        color: #777;
+        font-size: 15px;
+    }
+
+    &:hover {
+        border: 1px dashed #787be8;
+        color: #787be8;
+
+        .svg-icon {
+            color: #787be8;
+        }
+    }
+}
+
+// 拖拽中间面板无组件时的提醒文字样式
+.empty-info {
+    position: absolute;
+    top: 46%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 18px;
+    color: #ccb1ea;
+    letter-spacing: 4px;
+}
+
+.drawing-item {
+    position: relative;
+    cursor: move;
+
+    &:hover {
+        & > .el-form-item {
+            background: @selectedColor;
+            border-radius: 6px;
+        }
+    }
 }
